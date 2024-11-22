@@ -5,15 +5,15 @@ using UnityEngine;
 public class CombateJugador : MonoBehaviour
 {
     [Header("Vida")]
-    [SerializeField] private float vidaMaxima = 100f; // Vida máxima del jugador
+    [SerializeField] private float vidaMaxima = 100f; 
     private float vidaActual;
-    [SerializeField] private BarraDeVida barraDeVida; // Referencia a la barra de vida del jugador
+    [SerializeField] private BarraDeVida barraDeVida; 
 
     [Header("Ataque")]
-    [SerializeField] private float dañoAtaque = 10f; // Daño que inflige el jugador
-    [SerializeField] private float rangoAtaque = 1.5f; // Rango de ataque del jugador
-    [SerializeField] private Transform puntoAtaque; // Punto desde donde se detecta el ataque
-    [SerializeField] private float tiempoEntreAtaques = 1f; // Tiempo entre ataques
+    [SerializeField] private float dañoAtaque = 10f; 
+    [SerializeField] private float rangoAtaque = 1.5f; 
+    [SerializeField] private Transform puntoAtaque; 
+    [SerializeField] private float tiempoEntreAtaques = 1f; 
     private float tiempoSiguienteAtaque;
 
     private Animator animator;
@@ -22,7 +22,6 @@ public class CombateJugador : MonoBehaviour
     {
         vidaActual = vidaMaxima;
 
-        // Inicializa la barra de vida del jugador
         if (barraDeVida != null)
         {
             barraDeVida.InicializarBarraDeVida(vidaMaxima);
@@ -38,7 +37,7 @@ public class CombateJugador : MonoBehaviour
             tiempoSiguienteAtaque -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Fire1") && tiempoSiguienteAtaque <= 0) // "Fire1" equivale a clic izquierdo o botón de ataque
+        if (Input.GetButtonDown("Fire1") && tiempoSiguienteAtaque <= 0)
         {
             Atacar();
             tiempoSiguienteAtaque = tiempoEntreAtaques;
@@ -48,32 +47,25 @@ public class CombateJugador : MonoBehaviour
     private void Atacar()
     {
         Debug.Log("El jugador está atacando.");
-        animator.Play("Golpe"); // Reproduce la animación "Golpe"
-
-        // Detectar enemigos dentro del rango de ataque
+        animator.Play("Golpe"); 
         Collider2D[] enemigos = Physics2D.OverlapCircleAll(puntoAtaque.position, rangoAtaque);
 
         foreach (Collider2D enemigo in enemigos)
         {
             if (enemigo.CompareTag("Enemigo"))
             {
-                enemigo.GetComponent<Jefe>().TomarDaño(dañoAtaque); // Aplica daño al enemigo
+                enemigo.GetComponent<Jefe>().TomarDaño(dañoAtaque); 
             }
         }
     }
 
     public void TomarDaño(float daño)
     {
-        // Reduce la vida del jugador
         vidaActual = Mathf.Clamp(vidaActual - daño, 0, vidaMaxima);
-
-        // Actualiza la barra de vida del jugador
         if (barraDeVida != null)
         {
             barraDeVida.CambiarVidaActual(vidaActual);
         }
-
-        // Si la vida llega a 0, activa la muerte
         if (vidaActual <= 0)
         {
             Muerte();
@@ -83,13 +75,11 @@ public class CombateJugador : MonoBehaviour
     private void Muerte()
     {
         Debug.Log("El jugador ha muerto.");
-        animator.Play("Muerte"); // Reproduce la animación de muerte
-        // Aquí puedes agregar lógica adicional para reiniciar el nivel o detener el juego
+        animator.Play("Muerte"); 
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Visualiza el rango de ataque en la vista del editor
         if (puntoAtaque != null)
         {
             Gizmos.color = Color.red;

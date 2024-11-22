@@ -32,13 +32,8 @@ public class MovimientoJugador : MonoBehaviour
 
     private void Update()
     {
-        // Detectar movimiento horizontal (continúa mientras se presiona A o D)
         movimientoHorizontal = Input.GetAxisRaw("Horizontal") * velocidadDeMovimiento;
-
-        // Actualizar el parámetro del Animator
         animator.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
-
-        // Detectar entrada de salto solo si está en el suelo
         if (Input.GetButtonDown("Jump") && enSuelo)
         {
             salto = true;
@@ -47,24 +42,16 @@ public class MovimientoJugador : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Verificar si el personaje está en el suelo
         enSuelo = Physics2D.OverlapBox(controladorSuelo.position, dimensionesCaja, 0f, queEsSuelo);
         animator.SetBool("enSuelo", enSuelo);
-
-        // Mover al personaje
         Mover(movimientoHorizontal * Time.fixedDeltaTime, salto);
-
-        // Reiniciar salto
         salto = false;
     }
 
     private void Mover(float mover, bool saltar)
     {
-        // Suavizado del movimiento
         Vector3 velocidadObjetivo = new Vector2(mover, rb2D.linearVelocity.y);
         rb2D.linearVelocity = Vector3.SmoothDamp(rb2D.linearVelocity, velocidadObjetivo, ref velocidad, suavizadoDeMovimiento);
-
-        // Girar personaje si cambia de dirección
         if (mover > 0 && !mirandoDerecha)
         {
             Girar();
@@ -73,8 +60,6 @@ public class MovimientoJugador : MonoBehaviour
         {
             Girar();
         }
-
-        // Aplicar fuerza de salto si corresponde
         if (enSuelo && saltar)
         {
             enSuelo = false;
@@ -84,7 +69,6 @@ public class MovimientoJugador : MonoBehaviour
 
     private void Girar()
     {
-        // Cambiar orientación del personaje
         mirandoDerecha = !mirandoDerecha;
         Vector3 escala = transform.localScale;
         escala.x *= -1;
@@ -93,7 +77,6 @@ public class MovimientoJugador : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Visualizar la caja de detección del suelo
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(controladorSuelo.position, dimensionesCaja);
     }

@@ -434,7 +434,20 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      barra de vida (blood) 576x320_0: -7477935240406217491
+      barra de vida (blood) 576x320_1: 8449994982894297018
+      barra de vida (blood) 576x320_10: -1220633744164532714
+      barra de vida (blood) 576x320_11: 7675321121653234789
+      barra de vida (blood) 576x320_12: 1929065709866449380
+      barra de vida (blood) 576x320_2: -714658503626989623
+      barra de vida (blood) 576x320_3: -125044601193184867
+      barra de vida (blood) 576x320_4: 2973531976117448426
+      barra de vida (blood) 576x320_5: -4869019470071386553
+      barra de vida (blood) 576x320_6: 8901446178184314864
+      barra de vida (blood) 576x320_7: -5658259797296824615
+      barra de vida (blood) 576x320_8: -1240781672184754416
+      barra de vida (blood) 576x320_9: 8769018776661362316
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,6 +18,6 @@ public class BarraDeVida : MonoBehaviour
 
     public void CambiarVidaActual(float vidaActual)
     {
-        slider.value = Mathf.Clamp(vidaActual, 0, slider.maxValue); // Asegura que la barra no exceda los límites
+        slider.value = Mathf.Clamp(vidaActual, 0, slider.maxValue); 
     }
 }

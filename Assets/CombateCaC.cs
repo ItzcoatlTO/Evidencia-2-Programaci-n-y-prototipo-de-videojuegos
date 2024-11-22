@@ -32,7 +32,7 @@ public class CombateCaC : MonoBehaviour
 
     private void Golpe()
     {
-        animator.SetTrigger("Golpe"); // Activa el Trigger Golpe
+        animator.SetTrigger("Golpe"); 
 
         Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpe.position, radioGolpe);
 
@@ -40,7 +40,7 @@ public class CombateCaC : MonoBehaviour
         {
             if (colisionador.CompareTag("Enemigo"))
             {
-                colisionador.transform.GetComponent<Jefe>().TomarDaño(dañoGolpe); // Aplica daño al enemigo
+                colisionador.transform.GetComponent<Jefe>().TomarDaño(dañoGolpe); 
             }
         }
     }
